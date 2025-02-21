@@ -1,0 +1,43 @@
+/* CREATE TABLE playoffround (
+IDplayoffround INT (16) NOT NULL,
+team1id INT (13) NOT NULL,
+team2id INT (13) NOT NULL,
+startTime DATE NOT NULL,
+endTime DATE NOT NULL,
+roundnum INT (14) NOT NULL,
+PRIMARY KEY (IDplayoffround)
+);
+
+CREATE TABLE hockeygame (
+IDhockeygame INT (16) NOT NULL,
+roundid VARCHAR (3) NOT NULL,
+team1id INT (13) NOT NULL,
+team2id INT (13) NOT NULL,
+startTime DATE NOT NULL,
+descripcion VARCHAR (20) NOT NULL,
+PRIMARY KEY (IDhockeygame)
+);
+
+CREATE TABLE gamescores (
+IDgamescores INT (16) NOT NULL,
+team1score INT (100) NOT NULL,
+team2score INT (100) NOT NULL,
+PRIMARY KEY (IDgamescores)
+);
+
+CREATE TABLE hockeyteam(
+IDhockeyteam INT (16) NOT NULL,
+name VARCHAR (20) NOT NULL,
+logoLink VARCHAR (100) NOT NULL,
+PRIMARY KEY (IDhockeyteam)
+);
+
+CREATE TABLE hockeyteamplayer(
+IDhockeyteamplayer INT (16) NOT NULL,
+IDhockeyteam INT (16) NOT NULL,
+firstname VARCHAR (15) NOT NULL,
+lastname VARCHAR (15) NOT NULL,
+jerseynum INT (99) NOT NULL,
+PRIMARY KEY (IDhockeyteamplayer)
+);
+ */

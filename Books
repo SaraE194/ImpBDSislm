@@ -21,7 +21,8 @@ PRIMARY KEY (IDauthors)
 );
 
 INSERT INTO categories (IDcategories, nameCategories)
-values (1,'Cat-A'),
+values 
+(1,'Cat-A'),
 (2,'Cat-B'),
 (3,'Cat-C'),
 (4,'Cat-D'),

@@ -51,4 +51,272 @@ VALUES
 (7,'Book-G', 100, 5, 5),
 (8,'Book-H', 200, 5, 6),
 (9,'Book-I', 150, 7, 8);
+
+
+SELECT * FROM authors INNER JOIN books ON IDauthors = IDbooks;
++-----------+-------------+---------+-----------+------------+------------------+----------------+
+| IDauthors | nameAuthors | IDbooks | nameBooks | priceBooks | categoryBooks_id | authorBooks_id |
++-----------+-------------+---------+-----------+------------+------------------+----------------+
+|         1 | Author-A    |       1 | Book-A    |        100 |                1 |              2 |
+|         2 | Author-B    |       2 | Book-B    |        200 |                2 |              2 |
+|         3 | Author-C    |       3 | Book-C    |        150 |                3 |              2 |
++-----------+-------------+---------+-----------+------------+------------------+----------------+
+
+SELECT * FROM authors INNER JOIN categories  ON IDauthors = IDcategories;
++-----------+-------------+--------------+----------------+
+| IDauthors | nameAuthors | IDcategories | nameCategories |
++-----------+-------------+--------------+----------------+
+|         1 | Author-A    |            1 | Cat-A          |
+|         2 | Author-B    |            2 | Cat-B          |
+|         3 | Author-C    |            3 | Cat-C          |
++-----------+-------------+--------------+----------------+
+
+SELECT * FROM books INNER JOIN categories  ON IDbooks = IDcategories;
++---------+-----------+------------+------------------+----------------+--------------+----------------+
+| IDbooks | nameBooks | priceBooks | categoryBooks_id | authorBooks_id | IDcategories | nameCategories |
++---------+-----------+------------+------------------+----------------+--------------+----------------+
+|       1 | Book-A    |        100 |                1 |              2 |            1 | Cat-A          |
+|       2 | Book-B    |        200 |                2 |              2 |            2 | Cat-B          |
+|       3 | Book-C    |        150 |                3 |              2 |            3 | Cat-C          |
+|       4 | Book-D    |        100 |                3 |              1 |            4 | Cat-D          |
+|       5 | Book-E    |        200 |                3 |              1 |            5 | Cat-E          |
+|       6 | Book-F    |        150 |                4 |              1 |            6 | Cat-F          |
+|       7 | Book-G    |        100 |                5 |              5 |            7 | Cat-G          |
+|       8 | Book-H    |        200 |                5 |              6 |            8 | Cat-H          |
+|       9 | Book-I    |        150 |                7 |              8 |            9 | Cat-I          |
++---------+-----------+------------+------------------+----------------+--------------+----------------+
+
+SELECT * FROM authors LEFT OUTER JOIN books ON IDauthors = IDbooks;
++-----------+-------------+---------+-----------+------------+------------------+----------------+
+| IDauthors | nameAuthors | IDbooks | nameBooks | priceBooks | categoryBooks_id | authorBooks_id |
++-----------+-------------+---------+-----------+------------+------------------+----------------+
+|         1 | Author-A    |       1 | Book-A    |        100 |                1 |              2 |
+|         2 | Author-B    |       2 | Book-B    |        200 |                2 |              2 |
+|         3 | Author-C    |       3 | Book-C    |        150 |                3 |              2 |
+|        10 | Author-D    |    NULL | NULL      |       NULL |             NULL |           NULL |
+|        12 | Author-E    |    NULL | NULL      |       NULL |             NULL |           NULL |
++-----------+-------------+---------+-----------+------------+------------------+----------------+
+
+SELECT * FROM authors LEFT OUTER JOIN categories ON IDauthors = IDcategories;
++-----------+-------------+--------------+----------------+
+| IDauthors | nameAuthors | IDcategories | nameCategories |
++-----------+-------------+--------------+----------------+
+|         1 | Author-A    |            1 | Cat-A          |
+|         2 | Author-B    |            2 | Cat-B          |
+|         3 | Author-C    |            3 | Cat-C          |
+|        10 | Author-D    |         NULL | NULL           |
+|        12 | Author-E    |         NULL | NULL           |
++-----------+-------------+--------------+----------------+
+
+SELECT * FROM books LEFT OUTER JOIN categories ON IDbooks = IDcategories;
++---------+-----------+------------+------------------+----------------+--------------+----------------+
+| IDbooks | nameBooks | priceBooks | categoryBooks_id | authorBooks_id | IDcategories | nameCategories |
++---------+-----------+------------+------------------+----------------+--------------+----------------+
+|       1 | Book-A    |        100 |                1 |              2 |            1 | Cat-A          |
+|       2 | Book-B    |        200 |                2 |              2 |            2 | Cat-B          |
+|       3 | Book-C    |        150 |                3 |              2 |            3 | Cat-C          |
+|       4 | Book-D    |        100 |                3 |              1 |            4 | Cat-D          |
+|       5 | Book-E    |        200 |                3 |              1 |            5 | Cat-E          |
+|       6 | Book-F    |        150 |                4 |              1 |            6 | Cat-F          |
+|       7 | Book-G    |        100 |                5 |              5 |            7 | Cat-G          |
+|       8 | Book-H    |        200 |                5 |              6 |            8 | Cat-H          |
+|       9 | Book-I    |        150 |                7 |              8 |            9 | Cat-I          |
++---------+-----------+------------+------------------+----------------+--------------+----------------+
+
+SELECT * FROM authors RIGHT OUTER JOIN books ON IDauthors = IDbooks;
++-----------+-------------+---------+-----------+------------+------------------+----------------+
+| IDauthors | nameAuthors | IDbooks | nameBooks | priceBooks | categoryBooks_id | authorBooks_id |
++-----------+-------------+---------+-----------+------------+------------------+----------------+
+|         1 | Author-A    |       1 | Book-A    |        100 |                1 |              2 |
+|         2 | Author-B    |       2 | Book-B    |        200 |                2 |              2 |
+|         3 | Author-C    |       3 | Book-C    |        150 |                3 |              2 |
+|      NULL | NULL        |       4 | Book-D    |        100 |                3 |              1 |
+|      NULL | NULL        |       5 | Book-E    |        200 |                3 |              1 |
+|      NULL | NULL        |       6 | Book-F    |        150 |                4 |              1 |
+|      NULL | NULL        |       7 | Book-G    |        100 |                5 |              5 |
+|      NULL | NULL        |       8 | Book-H    |        200 |                5 |              6 |
+|      NULL | NULL        |       9 | Book-I    |        150 |                7 |              8 |
+
+
+SELECT * FROM authors RIGHT OUTER JOIN categories ON IDauthors = IDcategories;
++-----------+-------------+--------------+----------------+
+| IDauthors | nameAuthors | IDcategories | nameCategories |
++-----------+-------------+--------------+----------------+
+|         1 | Author-A    |            1 | Cat-A          |
+|         2 | Author-B    |            2 | Cat-B          |
+|         3 | Author-C    |            3 | Cat-C          |
+|      NULL | NULL        |            4 | Cat-D          |
+|      NULL | NULL        |            5 | Cat-E          |
+|      NULL | NULL        |            6 | Cat-F          |
+|      NULL | NULL        |            7 | Cat-G          |
+|      NULL | NULL        |            8 | Cat-H          |
+|      NULL | NULL        |            9 | Cat-I          |
++-----------+-------------+--------------+----------------+
+
+SELECT * FROM books RIGHT OUTER JOIN categories ON IDbooks = IDcategories;
++---------+-----------+------------+------------------+----------------+--------------+----------------+
+| IDbooks | nameBooks | priceBooks | categoryBooks_id | authorBooks_id | IDcategories | nameCategories |
++---------+-----------+------------+------------------+----------------+--------------+----------------+
+|       1 | Book-A    |        100 |                1 |              2 |            1 | Cat-A          |
+|       2 | Book-B    |        200 |                2 |              2 |            2 | Cat-B          |
+|       3 | Book-C    |        150 |                3 |              2 |            3 | Cat-C          |
+|       4 | Book-D    |        100 |                3 |              1 |            4 | Cat-D          |
+|       5 | Book-E    |        200 |                3 |              1 |            5 | Cat-E          |
+|       6 | Book-F    |        150 |                4 |              1 |            6 | Cat-F          |
+|       7 | Book-G    |        100 |                5 |              5 |            7 | Cat-G          |
+|       8 | Book-H    |        200 |                5 |              6 |            8 | Cat-H          |
+|       9 | Book-I    |        150 |                7 |              8 |            9 | Cat-I          |
++---------+-----------+------------+------------------+----------------+--------------+----------------+
+
+SELECT * FROM authors LEFT OUTER JOIN books ON IDauthors = IDbooks
+    -> union all
+    -> SELECT * FROM authors RIGHT OUTER JOIN books ON IDauthors = IDbooks;
++-----------+-------------+---------+-----------+------------+------------------+----------------+
+| IDauthors | nameAuthors | IDbooks | nameBooks | priceBooks | categoryBooks_id | authorBooks_id |
++-----------+-------------+---------+-----------+------------+------------------+----------------+
+|         1 | Author-A    |       1 | Book-A    |        100 |                1 |              2 |
+|         2 | Author-B    |       2 | Book-B    |        200 |                2 |              2 |
+|         3 | Author-C    |       3 | Book-C    |        150 |                3 |              2 |
+|        10 | Author-D    |    NULL | NULL      |       NULL |             NULL |           NULL |
+|        12 | Author-E    |    NULL | NULL      |       NULL |             NULL |           NULL |
+|         1 | Author-A    |       1 | Book-A    |        100 |                1 |              2 |
+|         2 | Author-B    |       2 | Book-B    |        200 |                2 |              2 |
+|         3 | Author-C    |       3 | Book-C    |        150 |                3 |              2 |
+|      NULL | NULL        |       4 | Book-D    |        100 |                3 |              1 |
+|      NULL | NULL        |       5 | Book-E    |        200 |                3 |              1 |
+|      NULL | NULL        |       6 | Book-F    |        150 |                4 |              1 |
+|      NULL | NULL        |       7 | Book-G    |        100 |                5 |              5 |
+|      NULL | NULL        |       8 | Book-H    |        200 |                5 |              6 |
+|      NULL | NULL        |       9 | Book-I    |        150 |                7 |              8 |
++-----------+-------------+---------+-----------+------------+------------------+----------------+
+
+SELECT * FROM authors LEFT OUTER JOIN categories ON IDauthors = IDcategories
+    -> union all
+    -> SELECT * FROM authors RIGHT OUTER JOIN categories ON IDauthors = IDcategories;
++-----------+-------------+--------------+----------------+
+| IDauthors | nameAuthors | IDcategories | nameCategories |
++-----------+-------------+--------------+----------------+
+|         1 | Author-A    |            1 | Cat-A          |
+|         2 | Author-B    |            2 | Cat-B          |
+|         3 | Author-C    |            3 | Cat-C          |
+|        10 | Author-D    |         NULL | NULL           |
+|        12 | Author-E    |         NULL | NULL           |
+|         1 | Author-A    |            1 | Cat-A          |
+|         2 | Author-B    |            2 | Cat-B          |
+|         3 | Author-C    |            3 | Cat-C          |
+|      NULL | NULL        |            4 | Cat-D          |
+|      NULL | NULL        |            5 | Cat-E          |
+|      NULL | NULL        |            6 | Cat-F          |
+|      NULL | NULL        |            7 | Cat-G          |
+|      NULL | NULL        |            8 | Cat-H          |
+|      NULL | NULL        |            9 | Cat-I          |
++-----------+-------------+--------------+----------------+
+
+SELECT * FROM books LEFT OUTER JOIN categories ON IDbooks = IDcategories
+    -> union all
+    -> SELECT * FROM books RIGHT OUTER JOIN categories ON IDbooks = IDcategories;
++---------+-----------+------------+------------------+----------------+--------------+----------------+
+| IDbooks | nameBooks | priceBooks | categoryBooks_id | authorBooks_id | IDcategories | nameCategories |
++---------+-----------+------------+------------------+----------------+--------------+----------------+
+|       1 | Book-A    |        100 |                1 |              2 |            1 | Cat-A          |
+|       2 | Book-B    |        200 |                2 |              2 |            2 | Cat-B          |
+|       3 | Book-C    |        150 |                3 |              2 |            3 | Cat-C          |
+|       4 | Book-D    |        100 |                3 |              1 |            4 | Cat-D          |
+|       5 | Book-E    |        200 |                3 |              1 |            5 | Cat-E          |
+|       6 | Book-F    |        150 |                4 |              1 |            6 | Cat-F          |
+|       7 | Book-G    |        100 |                5 |              5 |            7 | Cat-G          |
+|       8 | Book-H    |        200 |                5 |              6 |            8 | Cat-H          |
+|       9 | Book-I    |        150 |                7 |              8 |            9 | Cat-I          |
+|       1 | Book-A    |        100 |                1 |              2 |            1 | Cat-A          |
+|       2 | Book-B    |        200 |                2 |              2 |            2 | Cat-B          |
+|       3 | Book-C    |        150 |                3 |              2 |            3 | Cat-C          |
+|       4 | Book-D    |        100 |                3 |              1 |            4 | Cat-D          |
+|       5 | Book-E    |        200 |                3 |              1 |            5 | Cat-E          |
+|       6 | Book-F    |        150 |                4 |              1 |            6 | Cat-F          |
+|       7 | Book-G    |        100 |                5 |              5 |            7 | Cat-G          |
+|       8 | Book-H    |        200 |                5 |              6 |            8 | Cat-H          |
+|       9 | Book-I    |        150 |                7 |              8 |            9 | Cat-I          |
++---------+-----------+------------+------------------+----------------+--------------+----------------+
+
+SELECT * FROM authors LEFT JOIN books ON IDauthors = IDbooks WHERE IDbooks IS NULL;
++-----------+-------------+---------+-----------+------------+------------------+----------------+
+| IDauthors | nameAuthors | IDbooks | nameBooks | priceBooks | categoryBooks_id | authorBooks_id |
++-----------+-------------+---------+-----------+------------+------------------+----------------+
+|        10 | Author-D    |    NULL | NULL      |       NULL |             NULL |           NULL |
+|        12 | Author-E    |    NULL | NULL      |       NULL |             NULL |           NULL |
++-----------+-------------+---------+-----------+------------+------------------+----------------+
+
+SELECT * FROM authors LEFT JOIN categories ON IDauthors = IDcategories WHERE IDcategories IS NULL;
++-----------+-------------+--------------+----------------+
+| IDauthors | nameAuthors | IDcategories | nameCategories |
++-----------+-------------+--------------+----------------+
+|        10 | Author-D    |         NULL | NULL           |
+|        12 | Author-E    |         NULL | NULL           |
++-----------+-------------+--------------+----------------+
+
+SELECT * FROM books LEFT JOIN categories ON IDbooks = IDcategories WHERE IDcategories IS NULL;
+Empty set (0.00 sec)
+
+SELECT * FROM authors RIGHT JOIN books ON IDauthors = IDbooks WHERE IDbooks IS NULL;
+Empty set (0.00 sec)
+
+SELECT * FROM authors RIGHT JOIN categories ON IDauthors = IDcategories WHERE IDcategories IS NULL;
+Empty set (0.00 sec)
+
+SELECT * FROM books RIGHT JOIN categories ON IDbooks = IDcategories WHERE IDcategories IS NULL;
+Empty set (0.00 sec)
+
+SELECT * FROM authors LEFT OUTER JOIN books ON IDauthors = IDbooks  union all SELECT * FROM authors RIGHT OUTER JOIN books ON IDaut
+hors = IDbooks WHERE IDauthors IS NULL OR IDbooks IS NULL;
++-----------+-------------+---------+-----------+------------+------------------+----------------+
+| IDauthors | nameAuthors | IDbooks | nameBooks | priceBooks | categoryBooks_id | authorBooks_id |
++-----------+-------------+---------+-----------+------------+------------------+----------------+
+|         1 | Author-A    |       1 | Book-A    |        100 |                1 |              2 |
+|         2 | Author-B    |       2 | Book-B    |        200 |                2 |              2 |
+|         3 | Author-C    |       3 | Book-C    |        150 |                3 |              2 |
+|        10 | Author-D    |    NULL | NULL      |       NULL |             NULL |           NULL |
+|        12 | Author-E    |    NULL | NULL      |       NULL |             NULL |           NULL |
+|      NULL | NULL        |       4 | Book-D    |        100 |                3 |              1 |
+|      NULL | NULL        |       5 | Book-E    |        200 |                3 |              1 |
+|      NULL | NULL        |       6 | Book-F    |        150 |                4 |              1 |
+|      NULL | NULL        |       7 | Book-G    |        100 |                5 |              5 |
+|      NULL | NULL        |       8 | Book-H    |        200 |                5 |              6 |
+|      NULL | NULL        |       9 | Book-I    |        150 |                7 |              8 |
++-----------+-------------+---------+-----------+------------+------------------+----------------+
+
+SELECT * FROM authors LEFT OUTER JOIN categories ON IDauthors = IDcategories  union all SELECT * FROM authors RIGHT OUTER JOIN cate
+gories ON IDauthors = IDcategories WHERE IDauthors IS NULL OR IDcategories IS NULL;
++-----------+-------------+--------------+----------------+
+| IDauthors | nameAuthors | IDcategories | nameCategories |
++-----------+-------------+--------------+----------------+
+|         1 | Author-A    |            1 | Cat-A          |
+|         2 | Author-B    |            2 | Cat-B          |
+|         3 | Author-C    |            3 | Cat-C          |
+|        10 | Author-D    |         NULL | NULL           |
+|        12 | Author-E    |         NULL | NULL           |
+|      NULL | NULL        |            4 | Cat-D          |
+|      NULL | NULL        |            5 | Cat-E          |
+|      NULL | NULL        |            6 | Cat-F          |
+|      NULL | NULL        |            7 | Cat-G          |
+|      NULL | NULL        |            8 | Cat-H          |
+|      NULL | NULL        |            9 | Cat-I          |
++-----------+-------------+--------------+----------------+
+
+SELECT * FROM books LEFT OUTER JOIN categories ON IDbooks = IDcategories  union all SELECT * FROM books RIGHT OUTER JOIN categories
+ ON IDbooks = IDcategories WHERE IDbooks IS NULL OR IDcategories IS NULL;
++---------+-----------+------------+------------------+----------------+--------------+----------------+
+| IDbooks | nameBooks | priceBooks | categoryBooks_id | authorBooks_id | IDcategories | nameCategories |
++---------+-----------+------------+------------------+----------------+--------------+----------------+
+|       1 | Book-A    |        100 |                1 |              2 |            1 | Cat-A          |
+|       2 | Book-B    |        200 |                2 |              2 |            2 | Cat-B          |
+|       3 | Book-C    |        150 |                3 |              2 |            3 | Cat-C          |
+|       4 | Book-D    |        100 |                3 |              1 |            4 | Cat-D          |
+|       5 | Book-E    |        200 |                3 |              1 |            5 | Cat-E          |
+|       6 | Book-F    |        150 |                4 |              1 |            6 | Cat-F          |
+|       7 | Book-G    |        100 |                5 |              5 |            7 | Cat-G          |
+|       8 | Book-H    |        200 |                5 |              6 |            8 | Cat-H          |
+|       9 | Book-I    |        150 |                7 |              8 |            9 | Cat-I          |
++---------+-----------+------------+------------------+----------------+--------------+----------------+
+
+SELECT * FROM books LEFT OUTER JOIN categories ON IDbooks = IDcategories  union all SELECT * FROM books RIGHT OUTER JOIN categories ON IDbooks = IDcategories WHERE IDbooks IS NULL OR IDcategories IS NULL;
 */

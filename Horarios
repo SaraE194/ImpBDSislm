@@ -1,0 +1,121 @@
+/*
+show tables;
++---------------------------+
+| Tables_in_Taeri$default   |
++---------------------------+
+| detalle_horario           |
+| empleados                 |
+| horario                   |
+| plantilla_detalle_horario |
++---------------------------+
+
+DESC detalle_horario;
++--------------------+-------------+------+-----+---------+-------+
+| Field              | Type        | Null | Key | Default | Extra |
++--------------------+-------------+------+-----+---------+-------+
+| horario_id         | int         | NO   | PRI | NULL    |       |
+| hora_salida        | date        | NO   | PRI | NULL    |       |
+| hora_entrada       | date        | NO   |     | NULL    |       |
+| codigo_incapacidad | varchar(25) | YES  |     | NULL    |       |
++--------------------+-------------+------+-----+---------+-------+
+
+DESC plantilla_detalle_horario;
++--------------------+-------------+------+-----+---------+-------+
+| Field              | Type        | Null | Key | Default | Extra |
++--------------------+-------------+------+-----+---------+-------+
+| plantilla_id       | int         | NO   | PRI | NULL    |       |
+| dia                | int         | NO   | PRI | NULL    |       |
+| codigo_incapacidad | varchar(25) | YES  |     | NULL    |       |
+| turno              | varchar(25) | YES  |     | NULL    |       |
++--------------------+-------------+------+-----+---------+-------+
+
+DESC empleados;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| nombre_apellido | varchar(20) | YES  |     | NULL    |       |
+| departamento_id | int         | YES  |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+
+DESC horario;
++--------------+------+------+-----+---------+----------------+
+| Field        | Type | Null | Key | Default | Extra          |
++--------------+------+------+-----+---------+----------------+
+| horario_id   | int  | NO   | PRI | NULL    | auto_increment |
+| plantilla_id | int  | YES  |     | NULL    |                |
++--------------+------+------+-----+---------+----------------+
+
+ SELECT * FROM detalle_horario;
++------------+-------------+--------------+--------------------+
+| horario_id | hora_salida | hora_entrada | codigo_incapacidad |
++------------+-------------+--------------+--------------------+
+|          2 | 2025-05-09  | 2025-09-08   | vacaciones         |
++------------+-------------+--------------+--------------------+
+
+SELECT * FROM plantilla_detalle_horario;
++--------------+-----+--------------------+--------+
+| plantilla_id | dia | codigo_incapacidad | turno  |
++--------------+-----+--------------------+--------+
+|            1 |   1 | NULL               | 1/10   |
+|            1 |   2 | NULL               | 1/11,5 |
+|            1 |   3 | NULL               | 1/10   |
+|            1 |   4 | NULL               | 1/11,5 |
+|            1 |   5 | NULL               | 1/10   |
+|            1 |   6 | vacaciones         | NULL   |
+|            1 |   7 | vacaciones         | NULL   |
+|            2 |   1 | NULL               | 2/11,5 |
+|            2 |   2 | NULL               | 1/11,5 |
+|            2 |   3 | NULL               | 2/11,5 |
+|            2 |   4 | NULL               | 1|11.5 |
+|            2 |   5 | NULL               | 1/11,5 |
+|            2 |   6 | vacaciones         | NULL   |
+|            2 |   7 | vacaciones         | NULL   |
+|            3 |   1 | NULL               | 1#8    |
+|            3 |   2 | NULL               | 1.0    |
+|            3 |   3 | viaje_negocios     | NULL   |
++--------------+-----+--------------------+--------+
+
+SELECT * FROM empleados;
++-------------------+-----------------+
+| nombre_apellido   | departamento_id |
++-------------------+-----------------+
+| Margarita Suarez  |               1 |
+| Juan Gutierrez    |               1 |
+| Elena Romero      |               4 |
+| Juan Sánchez      |               3 |
+| Sofía Martínez    |               5 |
+| Pablo García      |               2 |
+| Lucía Fernández   |               4 |
+| Andrés López      |               3 |
+| Camila Pérez      |               5 |
+| Diego González    |               2 |
++-------------------+-----------------+
+
+SELECT * FROM horarios;
+ERROR 1146 (42S02): Table 'Taeri$default.horarios' doesn't exist
+mysql> SELECT * FROM horario;
++------------+--------------+
+| horario_id | plantilla_id |
++------------+--------------+
+|          1 |            5 |
+|          2 |            1 |
+|          3 |            3 |
+|          4 |            2 |
+|          5 |            4 |
++------------+--------------+
+
+
+show create table empleados;
++-----------+---------------------------------------------------------------------------------------------------------------------------------------
+----------------+
+| Table     | Create Table                                                                                                                          
+                |
++-----------+---------------------------------------------------------------------------------------------------------------------------------------
+----------------+
+| empleados | CREATE TABLE `empleados` (
+  `nombre_apellido` varchar(20) DEFAULT NULL,
+  `departamento_id` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 |
++-----------+---------------------------------------------------------------------------------------------------------------------------------------
+----------------+
+*/

@@ -318,5 +318,14 @@ SELECT * FROM books LEFT OUTER JOIN categories ON IDbooks = IDcategories  union 
 |       9 | Book-I    |        150 |                7 |              8 |            9 | Cat-I          |
 +---------+-----------+------------+------------------+----------------+--------------+----------------+
 
-SELECT * FROM books LEFT OUTER JOIN categories ON IDbooks = IDcategories  union all SELECT * FROM books RIGHT OUTER JOIN categories ON IDbooks = IDcategories WHERE IDbooks IS NULL OR IDcategories IS NULL;
+
+Alter table books ADD FOREIGN KEY (categoryBooks_id)
+    -> REFERENCES categories (IDcategories);
+
+INSERT INTO authors (IDauthors,nameAuthors)
+    -> VALUES
+    -> (5, 'Author-F'),
+    -> (6, 'Author-G'),
+    -> (8, 'Author-H');
+Alter table books ADD FOREIGN KEY (authorBooks_id) References authors (IDauthors);
 */

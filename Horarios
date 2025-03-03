@@ -91,9 +91,7 @@ SELECT * FROM empleados;
 | Diego González    |               2 |
 +-------------------+-----------------+
 
-SELECT * FROM horarios;
-ERROR 1146 (42S02): Table 'Taeri$default.horarios' doesn't exist
-mysql> SELECT * FROM horario;
+SELECT * FROM horario;
 +------------+--------------+
 | horario_id | plantilla_id |
 +------------+--------------+

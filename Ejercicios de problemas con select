@@ -1,0 +1,24 @@
+/* 
+
+Ejercicio 2:
+ SELECT Desarrollo FROM etapas_desarrollo WHERE Finalizado IS NULL;
++------------+
+| Desarrollo |
++------------+
+| Web        |
+| App        |
++------------+
+
+Ejercicio 3:
+SELECT Id_candidato 
+    -> FROM candidatos 
+    -> WHERE Descripcion IN ('Geologo', 'Astronomo', 'Tecnico')
+    -> GROUP BY Id_candidato
+    -> HAVING COUNT(DISTINCT Descripcion) = 3;
++--------------+
+| Id_candidato |
++--------------+
+|         1001 |
++--------------+
+
+*/

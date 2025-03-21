@@ -1,4 +1,19 @@
 /* 
+Ejercicio 1:
+ SELECT 
+    ->     CustomerID,
+    ->     MAX(CASE WHEN TypePhone = 'Celular' THEN Number END) AS Celular,
+    ->     MAX(CASE WHEN TypePhone = 'Trabajo' THEN Number END) AS Trabajo,
+    ->     MAX(CASE WHEN TypePhone = 'Casa' THEN Number END) AS Casa
+    -> FROM directorio_telefono
+    -> GROUP BY CustomerID;
++------------+--------------+--------------+--------------+
+| CustomerID | Celular      | Trabajo      | Casa         |
++------------+--------------+--------------+--------------+
+|       1001 | 333-897-5421 | 333-897-6542 | 333-698-9874 |
+|       2002 | 333-987-6541 | 333-812-9856 | NULL         |
+|       3003 | 333-987-6541 | NULL         | NULL         |
++------------+--------------+--------------+--------------+
 
 Ejercicio 2:
  SELECT Desarrollo FROM etapas_desarrollo WHERE Finalizado IS NULL;
@@ -20,5 +35,4 @@ SELECT Id_candidato
 +--------------+
 |         1001 |
 +--------------+
-
 */

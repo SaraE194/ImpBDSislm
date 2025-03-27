@@ -1,0 +1,27 @@
+SELECT A.Caso1, B.Caso2, C.Caso3
+    -> FROM (SELECT 'A' AS Caso1 UNION ALL
+    ->       SELECT 'B' UNION ALL
+    ->       SELECT 'C') AS A
+    -> CROSS JOIN (SELECT 'A' AS Caso2 UNION ALL
+    ->             SELECT 'B' UNION ALL
+    ->             SELECT 'C') AS B
+    -> CROSS JOIN (SELECT 'A' AS Caso3 UNION ALL
+    ->             SELECT 'B' UNION ALL
+    ->             SELECT 'C') AS C
+    -> WHERE A.Caso1 <> B.Caso2
+    ->   AND A.Caso1 <> C.Caso3
+    ->   AND B.Caso2 <> C.Caso3;
+
+
+SELECT desarrollo, AVG(DIFERENCIA) AS Promedio
+    -> FROM (
+    ->     SELECT desarrollo, DATEDIFF(terminacion, LAG(terminacion) OVER (PARTITION BY desarrollo ORDER BY terminacion)) AS DIFERENCIA
+    ->     FROM promedios
+    -> ) AS A
+    -> GROUP BY desarrollo;
+
+
+SELECT fecha, 
+    ->        ajuste, 
+    ->        SUM(ajuste) OVER (ORDER BY fecha) AS Inventario
+    -> FROM inventario;

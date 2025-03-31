@@ -1,3 +1,10 @@
+/* 
+Implementacion de una base de datos en un sistema de informacion
+2025/03/26 4-I
+SANCHEZ DE LA CRUZ VICTOR DANIEL
+Actividad 4
+*/
+
 SELECT flujo, 
        (Caso1 + Caso2 + Caso3) AS Aprobado
 FROM f_trabajo;

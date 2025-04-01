@@ -1,15 +1,14 @@
-SELECT flujo,
+SELECT Flujo,
        CASE 
            WHEN COUNT(DISTINCT estado) = 1 THEN MAX(estado)
-           WHEN 'Error' IN (SELECT estado FROM procesos p2 WHERE p2.flujo = p1.flujo) 
-                AND ('Finalizado' IN (SELECT estado FROM procesos p2 WHERE p2.flujo = p1.flujo) 
-                OR 'Corriendo' IN (SELECT estado FROM procesos p2 WHERE p2.flujo = p1.flujo))
+           WHEN SUM(estado = 'Error') > 0 
+                AND (SUM(estado = 'Finalizado') > 0 OR SUM(estado = 'Corriendo') > 0) 
            THEN 'Indeterminado'
-           WHEN 'Finalizado' IN (SELECT estado FROM procesos p2 WHERE p2.flujo = p1.flujo) 
-                AND 'Corriendo' IN (SELECT estado FROM procesos p2 WHERE p2.flujo = p1.flujo) 
+           WHEN SUM(estado = 'Finalizado') > 0 
+                AND SUM(estado = 'Corriendo') > 0 
            THEN 'Corriendo'
-       END AS Estado
-FROM procesos p1
+       END AS Estadol
+FROM procesos
 GROUP BY flujo;
 
 

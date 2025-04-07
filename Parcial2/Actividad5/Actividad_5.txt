@@ -1,0 +1,27 @@
+SELECT Flujo,
+       CASE 
+           WHEN COUNT(DISTINCT estado) = 1 THEN MAX(estado)
+           WHEN SUM(estado = 'Error') > 0 
+                AND (SUM(estado = 'Finalizado') > 0 OR SUM(estado = 'Corriendo') > 0) 
+           THEN 'Indeterminado'
+           WHEN SUM(estado = 'Finalizado') > 0 
+                AND SUM(estado = 'Corriendo') > 0 
+           THEN 'Corriendo'
+       END AS Estadol
+FROM procesos
+GROUP BY flujo;
+
+
+SELECT CONCAT('SELECT ', GROUP_CONCAT(Columna ORDER BY Columna SEPARATOR ', '), ' FROM concatenacion WHERE Precio >100') 
+AS Sintaxis
+FROM (SELECT 'Producto' AS Columna UNION ALL 
+      SELECT 'Precio' UNION ALL 
+      SELECT 'Disponibilidad') AS Columnas;
+
+
+SELECT 
+    LEAST(jA, jB) AS jugadorA, 
+    GREATEST(jA, jB) AS jugadorB, 
+    SUM(marcador) AS Marcador
+FROM marcadores
+GROUP BY LEAST(jA, jB), GREATEST(jA, jB);

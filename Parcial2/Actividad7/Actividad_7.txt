@@ -1,0 +1,26 @@
+SELECT categoria, id,marcador
+FROM (
+    SELECT id, marcador,
+        CASE 
+            WHEN RANK() OVER (ORDER BY marcador DESC) <= 3 THEN 1
+            ELSE 2
+        END AS categoria
+    FROM seleccion
+) AS sub
+ORDER BY categoria ASC, marcador DESC;
+
+
+with tabla AS ( select id_orden, id_cliente, fecha, cantidad, estado FROM paginacion ) SELECT * FROM tabla LIMIT 4,5;
+
+
+SELECT id_cliente, proveedor
+FROM (
+    SELECT 
+        id_cliente, 
+        proveedor,
+        COUNT(*) AS TotalPedidos,
+        ROW_NUMBER() OVER (PARTITION BY id_cliente ORDER BY COUNT(*) DESC) AS xd
+    FROM proveedores
+    GROUP BY id_cliente, proveedor
+) AS sub
+WHERE xd = 1;

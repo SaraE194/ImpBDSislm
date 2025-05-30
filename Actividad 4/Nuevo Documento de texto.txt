@@ -9,7 +9,7 @@ SELECT
     ->     ELSE 'Atrasado'
     ->   END AS Calendario
     -> FROM ordenes o
-    -> JOIN tiempo_manufactura t ON TRIM(LOWER(o.componente)) = TRIM(LOWER(t.producto))
+    -> JOIN tiempo_manufactura t ON o.componente = t.producto
     -> GROUP BY o.id, o.componente, o.entrega
     -> ORDER BY o.id;
 +------+-----------+-----------------+--------------------+------------+

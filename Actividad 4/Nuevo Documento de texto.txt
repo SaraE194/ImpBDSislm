@@ -1,0 +1,21 @@
+SELECT 
+    ->   o.id,
+    ->   o.componente AS Producto,
+    ->   SUM(t.manufactura) AS Dias_para_armar,
+    ->   o.entrega AS Dias_para_entregar,
+    ->   CASE
+    ->     WHEN SUM(t.manufactura) < o.entrega THEN 'Adelantado'
+    ->     WHEN SUM(t.manufactura) = o.entrega THEN 'En tiempo'
+    ->     ELSE 'Atrasado'
+    ->   END AS Calendario
+    -> FROM ordenes o
+    -> JOIN tiempo_manufactura t ON o.componente = t.producto
+    -> GROUP BY o.id, o.componente, o.entrega
+    -> ORDER BY o.id;
++------+-----------+-----------------+--------------------+------------+
+| id   | Producto  | Dias_para_armar | Dias_para_entregar | Calendario |
++------+-----------+-----------------+--------------------+------------+
+|    1 | Amanecer  |              13 |                  7 | Atrasado   |
+|    2 | Atardecer |               9 |                  3 | Atrasado   |
+|    3 | Anochecer |               4 |                  9 | Adelantado |
++------+-----------+-----------------+--------------------+------------+

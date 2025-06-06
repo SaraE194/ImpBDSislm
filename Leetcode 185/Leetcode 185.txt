@@ -1,0 +1,24 @@
+WITH UniqueSalaries AS (
+    SELECT DISTINCT departmentId, salary
+    FROM Employee
+),
+SalaryRanks AS (
+    SELECT 
+        departmentId,
+        salary,
+        DENSE_RANK() OVER (PARTITION BY departmentId ORDER BY salary DESC) AS rnk
+    FROM UniqueSalaries
+),
+TopSalaries AS (
+    SELECT departmentId, salary
+    FROM SalaryRanks
+    WHERE rnk <= 3
+)
+SELECT 
+    d.name AS Department,
+    e.name AS Employee,
+    e.salary AS Salary
+FROM Employee e
+JOIN Department d ON e.departmentId = d.id
+JOIN TopSalaries t ON e.departmentId = t.departmentId AND e.salary = t.salary;
+
